@@ -21,12 +21,11 @@ class MessageFactory:
     data = {
                 "header": {
                     "sendingSystem": "",
-                    "messageId": "",
                     "sentTimeStamp": datetime.datetime.now().isoformat(),
                     "seqNo": 1
                 },
                 "riskResult": {
-                    "subject": { "bookId": 153, "productType": "IRSwap", "counterparty": "cpty" },
+                    "subject": { "bookId": 153, "tradeId": "sometrade", "productType": "IRSwap", "counterparty": "cpty" },
                     "dv01": {
                             "currency": "ABC",
                             "curveId": "something",
@@ -40,9 +39,9 @@ class MessageFactory:
     def getMessage(self):
         local_data = self.data
         # Slice the last 12 characters from a uuid and prepend with country code to create a trade id.
-        local_data["header"]["messageId"] = str(uuid.uuid4())
         local_data["header"]["sendingSystem"] = random.choice(self.system)
         local_data["riskResult"]["subject"]["bookId"] = "BOOK" + str(random.choice(self.books))
+        local_data["riskResult"]["subject"]["tradeId"] = str(uuid.uuid4())[-12:]
         local_data["riskResult"]["subject"]["counterparty"] = random.choice(self.cps)
         local_data["riskResult"]["dv01"]["currency"] = random.choice(self.ccy)
         local_data["riskResult"]["dv01"]["curveId"] = random.choice(self.curves)
