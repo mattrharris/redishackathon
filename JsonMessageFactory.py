@@ -53,7 +53,10 @@ class MessageFactory:
 
     def main():
         mf = MessageFactory()
-        print(mf.getMessage())
+        # Create n messages and print them
+        n = 2
+        for i in range(n):
+            print(mf.getMessage())
 
 if __name__=="__main__":
     MessageFactory.main()
