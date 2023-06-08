@@ -26,7 +26,7 @@ class MessageFactory:
                     "seqNo": 1
                 },
                 "riskResult": {
-                    "subject": { "bookId": 153, "productType": "IRSwap" },
+                    "subject": { "bookId": 153, "productType": "IRSwap", "counterparty": "cpty" },
                     "dv01": {
                             "currency": "ABC",
                             "curveId": "something",
@@ -43,6 +43,7 @@ class MessageFactory:
         local_data["header"]["messageId"] = str(uuid.uuid4())
         local_data["header"]["sendingSystem"] = random.choice(self.system)
         local_data["riskResult"]["subject"]["bookId"] = "BOOK" + str(random.choice(self.books))
+        local_data["riskResult"]["subject"]["counterparty"] = random.choice(self.cps)
         local_data["riskResult"]["dv01"]["currency"] = random.choice(self.ccy)
         local_data["riskResult"]["dv01"]["curveId"] = random.choice(self.curves)
         for t in self.tenors:
